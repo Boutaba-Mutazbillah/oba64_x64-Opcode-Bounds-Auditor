@@ -1,5 +1,5 @@
 ; ==============================================================================
-;  Project: Boutaba-Kernel-Rootkit-Hook-Detector v1.0
+;  Project: Boutaba-kernel-hook-scanner v1.0
 ;  Developer: Boutaba Motezeballah — Systems Architect & Reverse Engineer
 ;  Architecture: x86_64 ASM (Linux Platform Subversion Auditing)
 ;  Description: Advanced Runtime Syscall Code Segment Verification Layer.
@@ -9,7 +9,7 @@ section .data
     msg_safe     db "Status: INTEGRITY SECURE. No unauthorized memory hooks.", 10
     len_safe     equ \$ - msg_safe
 
-    msg_hooked   db "CRITICAL ERROR: Kernel Syscall Hook Detected! Rootkit Present.", 10
+    msg_hooked   db "CRITICAL ERROR: Kernel syscall-integrity-check! Rootkit Present.", 10
     len_hooked   equ \$ - msg_hooked
 
 section .text
