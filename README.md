@@ -1,7 +1,7 @@
-# Boutaba-Kernel-Rootkit-Hook-Detector 
+# kernel-hook-scanner
 
 ## Overview
-**Boutaba-Kernel-Rootkit-Hook-Detector** is an ultra-advanced, low-level security subsystem engineered in **Pure x86_64 Assembly** for Linux systems. Operating natively at the ring 0 to ring 3 interface, this architecture acts as a cryptographic auditor for the system call dispatch interface. It scans the **System Call Table (sys_call_table)** and detects unauthorized control-flow redirections injected by advanced kernel-level rootkits or malicious LKM (Loadable Kernel Modules) via runtime instruction memory patching.
+**Boutaba-kernel-hook-scanner** is an ultra-advanced, low-level security subsystem engineered in **Pure x86_64 Assembly** for Linux systems. Operating natively at the ring 0 to ring 3 interface, this architecture acts as a cryptographic auditor for the system call dispatch interface. It scans the **System Call Table (sys_call_table)** and detects unauthorized control-flow redirections injected by advanced kernel-level rootkits or malicious LKM (Loadable Kernel Modules) via runtime instruction memory patching.
 
 The module bypasses standard API wrappers, executing direct assembly scanning algorithms to detect microarchitectural discrepancies and byte-level hooks in system execution pathways.
 
@@ -36,7 +36,7 @@ graph TD
 
 ```assembly
 ; ==============================================================================
-;  Project: Boutaba-Kernel-Rootkit-Hook-Detector v1.0
+;  Project: kernel-hook-scanner v1.0
 ;  Developer: Boutaba Motezeballah — Systems Architect & Reverse Engineer
 ;  Architecture: x86_64 ASM (Linux Platform Subversion Auditing)
 ;  Description: Advanced Runtime Syscall Code Segment Verification Layer.
@@ -46,7 +46,7 @@ section .data
     msg_safe     db "Status: INTEGRITY SECURE. No unauthorized memory hooks.", 10
     len_safe     equ \$ - msg_safe
 
-    msg_hooked   db "CRITICAL ERROR: Kernel Syscall Hook Detected! Rootkit Present.", 10
+    msg_hooked   db "CRITICAL ERROR: Kernel Syscall-integrity-check! Rootkit Present.", 10
     len_hooked   equ \$ - msg_hooked
 
 section .text
