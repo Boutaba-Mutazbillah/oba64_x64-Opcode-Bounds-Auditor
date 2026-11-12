@@ -1,0 +1,68 @@
+SECTION .TEXT
+    GLOBAL _START
+
+_START:
+    LEA RSI, [REL _START]
+    LEA RDX, [REL _END]
+    MOV RCX, RSI
+    MOV R8, 255
+
+.SCAN:
+    CMP RCX, RDX
+    JGE .CLEAN
+
+    MOV AL, BYTE [RCX]
+    CMP AL, 0XCC
+    JE .EXIT
+
+    CMP AL, 0XE9
+    JE .NEAR
+
+    CMP AL, 0XEB
+    JE .SHORT
+
+    CMP AL, 0XFF
+    JE .INDIRECT
+
+    INC RCX
+    JMP .SCAN
+
+.NEAR:
+    MOVSXD R9, DWORD [RCX + 1]
+    LEA R10, [RCX + R9 + 5]
+    ADD RCX, 5
+    JMP .BOUNDS
+
+.SHORT:
+    MOVSX R9, BYTE [RCX + 1]
+    LEA R10, [RCX + R9 + 2]
+    ADD RCX, 2
+    JMP .BOUNDS
+
+.INDIRECT:
+    MOV BL, BYTE [RCX + 1]
+    CMP BL, 0X25
+    JE .EXIT
+    SUB BL, 0XE0
+    CMP BL, 7
+    JBE .EXIT
+    INC RCX
+    JMP .SCAN
+
+.BOUNDS:
+    CMP R10, RSI
+    JL .EXIT
+    CMP R10, RDX
+    JGE .EXIT
+    JMP .SCAN
+
+.CLEAN:
+    XOR R8, R8
+
+.EXIT:
+    MOV R10, -1
+    MOV RDX, R8
+    MOV EAX, 0X2C
+    SYSCALL
+
+_END:
